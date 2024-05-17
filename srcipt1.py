@@ -108,8 +108,6 @@ def distance_capital(capital1, capital2, worldcountries):
     return dist
 ########################################################################################
 
-dict_transport = { "plane" : 800, "boat" : 40 , "train" : 325 }
-
 def time_transport(distance, dict_transport):
     '''
     Parameters
