@@ -16,7 +16,7 @@ def csv_to_dict(self, csv_file):
     with open(csv_file, newline = "") as csvfile:
         reader = csv.reader(csvfile, delimiter = ",")
         data = {}
-        for country_code, country, capital, lat, long in reader:
+        for country_code, country, altitude, capital, lat, long in reader:
             if country_code not in data:
                 data[country_code] = {}
                 data[country_code]["name"] = country
