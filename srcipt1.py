@@ -4,7 +4,7 @@ Created on Fri Apr 12 11:02:04 2024
 
 @author: Utilisateur
 """
-def csv_to_dict(self, csv_file):
+def csv_country(self, csv_file):
     '''
     Parameters
     ----------
@@ -25,6 +25,7 @@ def csv_to_dict(self, csv_file):
                 data[country_code]["longitude"] = long
     return data
 
+#################################################################################################################################################################################"
 
 def convert_in_latN_and_longE(worldcountries):
     ''' 
@@ -60,7 +61,7 @@ def convert_in_latN_and_longE(worldcountries):
 
     return worldcountries
 
-#######################################################################"
+################################################################################################
 def dms2dd(d, m, s):
     """Convertit un angle "degrés minutes secondes" en "degrés décimaux"
     """
@@ -128,7 +129,7 @@ def time_transport(distance, dict_transport):
 
     return travel_time
 
-  
 
+  
   
 print("projet")
