@@ -4,7 +4,7 @@ Created on Fri Apr 12 11:02:04 2024
 
 @author: Utilisateur
 """
-def csv_to_dict(self, csv_file):
+def csv_to_dict(csv_file):
     '''
     Parameters
     ----------
@@ -128,7 +128,13 @@ def time_transport(distance, dict_transport):
 
     return travel_time
 
-  
+def dict_transport_from_csv (csv_file):
+     with open(csv_file, newline = "") as csvfile:
+        reader = csv.reader(csvfile, delimiter = ",")
+        dict_transport = {}
+        for transport, speed in reader:
+            dict_transport[transport] = speed
+        return dict_transport
 
   
 print("projet")
