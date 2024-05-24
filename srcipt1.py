@@ -4,7 +4,7 @@ Created on Fri Apr 12 11:02:04 2024
 
 @author: Utilisateur
 """
-def csv_to_dict(csv_file):
+def speed_csv_to_dict(csv_file):
     '''
     Parameters
     ----------
@@ -13,17 +13,30 @@ def csv_to_dict(csv_file):
     Returns a dictionnary having the elements of the first column as a key, and the elements of the following columns as the value in the form of a list:
     data
     '''
+    eliminer_entete = True
     with open(csv_file, newline = "") as csvfile:
         reader = csv.reader(csvfile, delimiter = ",")
         data = {}
-        for country_code, country, altitude, capital, lat, long in reader:
-            if country_code not in data:
-                data[country_code] = {}
-                data[country_code]["name"] = country
-                data[country_code]["capital"] = capital
-                data[country_code]["latitude"] = lat
-                data[country_code]["longitude"] = long
+        if eliminer_entete:
+            reader.__next__()
+        for row in reader:
+            transport, speed = row
+            if transport not in data:
+                data[transport] = speed
     return data
+
+def country_csv_to_dict (csv_file):
+    eliminer_entete = True
+    with open(csv_file, newline = "") as csvfile:
+        reader = csv.reader(csvfile, delimiter = ",")
+        data = {}
+        if eliminer_entete:
+            reader.__next__()
+        for row in reader:
+            country_code, country, capital, lat, long, pop, yearly_change, net_change, density, land_area, migrants, fertility_rate, median_age, urban_pop, world_share = row
+            data[country_code] = [country, capital, lat, long, pop, yearly_change, net_change, density, land_area, migrants, fertility_rate, median_age, urban_pop, world_share]
+    return data
+        
 
 
 def convert_in_latN_and_longE(worldcountries):
