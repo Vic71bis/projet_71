@@ -4,7 +4,7 @@ Created on Fri May 31 16:29:56 2024
 
 @author: ifyes
 """
-def get_dist_from_time_and_transport (time_hours):
+def get_dist_from_time_and_transport (self, time_hours):
     if self.choice_air.get() == 1:
         speed = 800
     if  self.choice_earth.get() == 1:
