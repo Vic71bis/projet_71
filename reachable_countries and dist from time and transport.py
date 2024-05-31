@@ -4,15 +4,6 @@ Created on Fri May 31 16:29:56 2024
 
 @author: ifyes
 """
-
-time and transport --> distnace parocurue
-
-revoir reachable countries --> voir pays accessbile par raport à distance localisation
-initilae
-
-
-
-
 def get_dist_from_time_and_transport (time_hours):
     if self.choice_air.get() == 1:
         speed = 800
