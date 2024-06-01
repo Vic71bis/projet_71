@@ -98,14 +98,14 @@ class EntryWindow(ct.CTk):
     def store_user_input(self):
              self.entry_name = self.entry_1.get()
              self.entry_position = self.entry_2.get()
-             if check_error_entry_position (self, world_countries):
-                 self.entry_position = self.entry_2.get()
+             #if check_error_entry_position (self, countries_info):
+             self.entry_position = self.entry_2.get()
              self.time_for_travelling_hour = self.entry3.get()
              self.time_for_travelling_min = self.entry4.get()
         
-    def check_error_entry_position (self, world_countries):
+    def check_error_entry_position (self, countries_info):
             error = True
-            for country in world_countries.values():
+            for country in countries_info.values():
                 if country[0] == self.entry_position:
                     error = False
             return error  
