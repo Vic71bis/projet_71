@@ -1,33 +1,25 @@
-    def compute_reachable_countries(self):
+     def compute_reachable_countries(self):
         reachable_country =[]
         time_hours = self.convert_time_hours()
         position = self.get_country_code_from_address(self.entry_position)
         dist=self.get_dist_from_time_and_transport(time_hours)
         distance_countries=0
-        for country_code in self.countries_info.keys() :
-            distance_countries = self.distance_countries(position,country_code)
-            if distance_countries < dist and distance_countries!=0 :
-                country = countries_info[country_code][0]
-                reachable_country.append(f'{country}')
-                print(country)
-        if self.choice_earth.get() == 1 :
-            neighbours_list = self.country_neighbours.get(position)
-            print(neighbours_list)
-            for country_code in neighbours_list: 
-                element_name=country_code[0]
-                if element_name not in reachable_country :
-                    remove = reachable_country.index(element_name)
-                    reachable_country.pop(remove)
-                    print(country_code)
-            for element in reachable_country :
-                country = self.get_country_code_from_address(element)
-                path_to_country = self.get_path_btw_countries(position,country)
-                d=0
-                country_1 = position
-                for element in path_to_country :
-                     d+= self.distance_countries(country_1, element)
-                     print(element)
-                if d> dist :
-                    element_name = self.countries_info[element][0]
-                    country_1= element
+        if self.choice_air.get()==1 :
+            for country_code in self.countries_info.keys() :
+                distance_countries = self.distance_countries(position,country_code)
+                if distance_countries < dist and distance_countries!=0 :
+                    country = countries_info[country_code][0]
+                    reachable_country.append(f'{country}')
+        elif self.choice_earth.get()==1 :
+            for country_code in self.countries_info.keys() :
+                path_list = self.get_path_btw_countries(position, country_code)
+                print(path_list)
+                if path_list :
+                    for element in path_list :
+                        distance_countries +=self.distance_countries(position, country_code)
+                        if distance_countries < dist and distance_countries !=0 :
+                            print(element)
+                            country_name = self.countries_info[element][0]
+                            reachable_country.append(f'{country_name}')
+                    distance_countries=0   
         return reachable_country
