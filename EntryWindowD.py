@@ -15,25 +15,34 @@ import customtkinter as ct
 ct.set_default_color_theme("dark-blue")
 ct.set_appearance_mode("light")
 
-class EntryWindow(ct.CTk):
+
+
+##### Define all the widgets : the buttons, the areas to enter text
+##### Positionning of the widgets
+
+##### starting window where the user is giving its informations
+class EntryWindow(ct.CTk): 
     EntryWindow_Name = "Introduction Window"
     HEIGHT = 300
     WIDTH = 600
     
-    def __init__(self, create_widget=True, *args, **kwargs):
+    def __init__(self, create_widget=True, *args, **kwargs): 
+        ###### create the window
         super().__init__(*args, **kwargs)
         self.geometry(f"{EntryWindow.WIDTH}x{EntryWindow.HEIGHT}")
         self.minsize(EntryWindow.WIDTH, EntryWindow.HEIGHT)
         self.title(EntryWindow.EntryWindow_Name)
         self.protocol("WM_DELETE_WINDOW", self.quitter)
         self.bind("<Command-q>", self.quitter)
-        
+
+        ##### Name, country, time_for_travelling (are the attributs of the class that the user will define while writing inside the Entry widgets)
         self.window_closed = False
         self.entry_name = None
         self.entry_position = None
         self.time_for_travelling_hour = None
         self.time_for_travelling_min = None
 
+        ##### Choice of the transport : the user can choose either to travel by plane or by bus/car
         self.choice_air = ct.IntVar()
         self.choice_earth = ct.IntVar()
         self.background_color = ct.IntVar()
@@ -44,7 +53,8 @@ class EntryWindow(ct.CTk):
     def create_widgets(self):
         
             self.resizable(False, False)
-            
+        
+            ##### create a grid to place the widgets
             self.grid_columnconfigure(0, weight=1)
             self.grid_columnconfigure(1, weight=1)
             self.grid_columnconfigure(2, weight=1)
@@ -56,6 +66,7 @@ class EntryWindow(ct.CTk):
             self.grid_rowconfigure(3, weight=1)
             self.grid_rowconfigure(4, weight =1)
            
+            ####### Add the labels to the text entry widgets (name, position, time_for_travelling)
             name_label=ct.CTkLabel(self, text="Name : ",  fg_color = '#7FB3D5', corner_radius = 10, anchor = 'w')
             name_label.grid(row=0, column=0, padx= (5,5), pady= (5,5))
            
@@ -85,7 +96,8 @@ class EntryWindow(ct.CTk):
             transport_air.grid(row=3, column = 1,  padx= (5,5), pady= (5,5))
             transport_earth=ct.CTkCheckBox(self, text='Train/Car', variable = self.choice_earth)
             transport_earth.grid(row=3, column = 3,  padx= (5,5), pady= (5,5))
-            
+
+            ##### creation of the buttons Quit, Save and Next and place them in the window
             self.following_window=ct.CTkButton(self, text='Next ->',  fg_color = '#7FB3D5', corner_radius = 10)
             self.following_window.grid(row=4,column=0,  padx= (5,5), pady= (5,5))
             
@@ -95,26 +107,51 @@ class EntryWindow(ct.CTk):
             self.save = ct.CTkButton (self,text = "Save", command = self.store_user_input,  fg_color = '#7FB3D5', corner_radius = 10)
             self.save.grid (row = 4, column = 1, padx= (5,5), pady= (5,5) )
 
+
+    
     def store_user_input(self):
+            """ 
+            The function stores the variables entered by the user in the attributs of the Entry Window class
+            Parameters : 
+                self
+
+            Return : 
+                None (but modifies the attributs of the class when running the function)
+            """
+        
              self.entry_name = self.entry_1.get()
              self.entry_position = self.entry_2.get()
              if check_error_entry_position (self, world_countries):
                  self.entry_position = self.entry_2.get()
              self.time_for_travelling_hour = self.entry3.get()
              self.time_for_travelling_min = self.entry4.get()
-        
+
+    
     def check_error_entry_position (self, world_countries):
+        """ 
+        Checks if the position entered by the user is inside the csv file we use after for the rest of the code
+        Parameters : 
+            self
+            world_countries (a dico of all the countries available)
+        Return : 
+            error (boolean saying if the entrance if correct )
+        """
             error = True
             for country in world_countries.values():
                 if country[0] == self.entry_position:
                     error = False
             return error  
+
+
     
+    #### closes the window 
     def quitter (self, event=0):
            self.window_closed = True
            self.destroy()
            print (self.entry_name, self.entry_position)
 
+    
+    ##### Opens the window
     def start(self):
         self.mainloop()
 
