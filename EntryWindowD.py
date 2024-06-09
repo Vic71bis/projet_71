@@ -113,10 +113,10 @@ class EntryWindow(ct.CTk):
             """ 
             The function stores the variables entered by the user in the attributs of the Entry Window class
             Parameters : 
-                self
+                self (import the attributs of the class Entrywindow) 
 
             Return : 
-                None (but modifies the attributs of the class when running the function)
+                None (but modifies the attributs of the Entrywindow class when running the function)
             """
         
              self.entry_name = self.entry_1.get()
@@ -131,14 +131,14 @@ class EntryWindow(ct.CTk):
         """ 
         Checks if the position entered by the user is inside the csv file we use after for the rest of the code
         Parameters : 
-            self
+            self (to get the attributs of the Entrywindow class)
             world_countries (a dico of all the countries available)
         Return : 
             error (boolean saying if the entrance if correct )
         """
             error = True
-            for country in world_countries.values():
-                if country[0] == self.entry_position:
+            for country in world_countries.values():   #### goes through the dico world_countries 
+                if country[0] == self.entry_position:   ##### check if the country entered is within the dicotionnary
                     error = False
             return error  
 
@@ -146,7 +146,7 @@ class EntryWindow(ct.CTk):
     
     #### closes the window 
     def quitter (self, event=0):
-           self.window_closed = True
+           self.window_closed = True  
            self.destroy()
            print (self.entry_name, self.entry_position)
 
